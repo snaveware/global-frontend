@@ -1,0 +1,115 @@
+
+
+<div class="table-container "[class.mat-elevation-z8]="display =='home'">
+      <div class="table-search">
+         <mat-form-field class="filter" *ngIf="display != 'view'">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. john" #input>
+         </mat-form-field>
+   
+         
+      </div>
+         
+      <table class="table" mat-table [dataSource]="dataSource" matSort>
+    
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tracking Id </th>
+          <td mat-cell *matCellDef="let row"> {{row.trackingId}} </td>
+        </ng-container>
+    
+        <!-- title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> title</th>
+          <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+        </ng-container>
+   
+        <!-- customer Column -->
+        <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> customer</th>
+            <td mat-cell *matCellDef="let row"> {{row.customerName}} </td>
+          </ng-container>
+   
+           <!-- telephone Column -->
+         <ng-container matColumnDef="telephone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> telephone</th>
+            <td mat-cell *matCellDef="let row"> {{row.customerTelephone}} </td>
+         </ng-container>
+   
+          <!-- CBM Column -->
+         <ng-container matColumnDef="CBM">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> CBM</th>
+            <td mat-cell *matCellDef="let row"> {{row.CBM}} </td>
+         </ng-container>
+
+         <!-- cost Column -->
+         <ng-container matColumnDef="cost">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> cost</th>
+            <td mat-cell *matCellDef="let row"> {{row.totalCost}} </td>
+         </ng-container>
+
+         <!-- paid Column -->
+         <ng-container matColumnDef="paid">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> paid</th>
+            <td mat-cell *matCellDef="let row"> {{row.amountPaid}} </td>
+         </ng-container>
+
+         <!-- currency Column -->
+         <ng-container matColumnDef="currency">
+               <th mat-header-cell *matHeaderCellDef mat-sort-header> currency</th>
+               <td mat-cell *matCellDef="let row"> {{row.currency}} </td>
+            </ng-container>
+   
+          <!-- status Column -->
+         <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+            <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+          </ng-container>
+   
+          <!-- actions Column -->
+         <ng-container matColumnDef="actions" *ngIf="display == 'home'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> actions</th>
+            <td mat-cell *matCellDef="let row"> 
+               <button [matMenuTriggerFor]="actionsMenu" mat-icon-button class="table-actions-btn">
+                  <i class="fas fa-ellipsis-h"></i>
+               </button>
+               <mat-menu #actionsMenu="matMenu">
+                  <button (click) ="onView(row)" mat-menu-item>
+                     <i title="view" class="fas fa-eye"></i>
+                     <span> View</span>
+                  </button>
+                  
+                  <button (click) ="onEdit(row)" mat-menu-item>
+                     <i title="edit" class="fas fa-pen"></i>
+                     <span> Edit</span>
+                  </button>
+   
+                  <button (click) ="onDelete(row) "mat-menu-item >
+                     <i title="delete" class="fas fa-trash-alt"></i>
+                     <span> Delete</span>
+                  </button>
+   
+                  <!-- <button  (click)="onGenPdf(row)" mat-menu-item>
+                     <i title="print" class="fas fa-file-pdf"></i>
+                     <span> Pdf</span>
+                  </button> -->
+                  
+               </mat-menu>
+            </td>
+         </ng-container>
+    
+        
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr [class.clickable]="display == 'select'" mat-row *matRowDef="let row; columns: displayedColumns;"(click)="onSelect(row)"></tr>
+    
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">Sorry, No data was found.</td>
+        </tr>
+      </table>
+    
+      <mat-paginator *ngIf="display != 'view'" [pageSizeOptions]="[5, 10, 25,50, 100]" showFirstLastButtons></mat-paginator>
+      
+   </div>
+   

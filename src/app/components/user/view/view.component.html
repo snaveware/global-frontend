@@ -1,0 +1,129 @@
+
+
+
+<app-user-header
+   *ngIf="!isLoadingResults"
+   [userNames] = "user.firstName+' '+user.lastName"
+   [userGroup] = "user.groupName"
+   [userProfileUrl] ="userProfileUrl"
+   [userId] = "user._id">
+</app-user-header>
+
+<div class="grid-view">
+   <div class="view">
+      <app-dialog
+         [message] ="warningMessage"
+         *ngIf="showWarning"
+         action = 'error'
+         (selected) = "closeDialog($event)">
+      </app-dialog>
+   
+      <div class="loader" *ngIf="isLoadingResults" >
+            <mat-spinner ></mat-spinner> 
+      </div>
+      <div *ngIf="!isLoadingResults  && user && action == 'view'" class="personal-info group">
+         <section class="menu">
+            <div class="start">
+               <span class="first">personal info </span>
+            </div>
+            <button (click)="action = 'edit'" mat-fab color="primary">
+               <i class="fas fa-user-edit"></i>
+            </button>
+         </section>
+         <section class="content">
+   
+            <div class="name">
+               <span class="property">
+                  <i class="fas fa-user">&nbsp;</i>
+                  <span>Name</span>
+               </span>
+               
+               <span class="value">
+                  {{user.firstName}} {{user.lastName}}
+               </span>
+               
+            </div>
+            <div class="email">
+               <p class="property">
+                  <i class="fas fa-envelope">&nbsp;</i>
+                  <span>Email</span>
+               </p>
+              
+               <span class="value">
+                  {{user.email}} 
+               </span>
+               
+            </div>
+            <div class="telephone">
+               <p class="property">
+                  <i class="fas fa-mobile">&nbsp;</i>
+                   <span>Telephone</span>
+               </p>
+              
+               <span class="value">
+                  {{user.telephone}}
+               </span>
+               
+            </div>
+            <div class="groupName">
+               <p class="property">
+                  <i class="fas fa-user-friends">&nbsp;</i>
+                  <span>Group</span>
+               </p>
+               
+               <span class="value">
+                  {{user.groupName}}
+               </span>  
+            </div>
+   
+            <div class="status">
+               <p class="property">
+                  <i class="fas fa-question-circle">&nbsp;</i>
+                  <span>Status</span> 
+               </p>
+               <span class="value">
+                  {{user.status}}
+               </span>
+            </div>
+         </section>
+   
+      
+      </div>
+      <div class="edit-container">
+      
+         <div *ngIf="!isLoadingResults && user && action == 'edit'" class="edit">
+         
+            <section class="menu">
+               <div class="start">
+                  <span class="first">personal info </span>
+               </div>
+               <button (click)="action = 'view'" title="close" mat-fab color="primary">
+                  <i class="fas fa-times"></i>
+               </button>
+            </section>
+         
+            <app-user-form
+               action="edit"
+               (edited) = "onUpdate($event)"
+               [originalUserData] = "user">
+         
+            </app-user-form>
+         </div>
+      </div>
+   </div>
+   <div class="view-actions">
+     
+      <h3 class="action">Actions</h3>
+      <button class="action" mat-flat-button color="primary" (click) ="onUpdate({status:'locked'})">
+         <i class="fas fa-user-lock"></i>
+         <span>Deactivate</span>
+      </button>
+      <button class="action" mat-flat-button color="primary" (click) ="onUpdate({status:'active'})">
+         <i class="fas fa-unlock-alt"></i>
+         <span>Activate</span>
+      </button>
+     
+   </div>
+</div>
+
+

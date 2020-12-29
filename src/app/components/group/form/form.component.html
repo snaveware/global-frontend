@@ -1,0 +1,147 @@
+<div class="form">
+
+   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+      <h2 *ngIf="action == 'create'" class="title">User Group</h2>
+      <mat-form-field class="input">
+         <mat-label>Name</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="name"
+         placeholder="Ex. Admin">
+   
+         <mat-error *ngIf="formGroup.controls.name.invalid && formGroup.controls.name.errors.required">
+            Name is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Level</mat-label>
+         <input 
+         matInput 
+         type="number"
+         formControlName="level"
+         placeholder="Ex. 6">
+         <mat-hint>
+            Hierachical level of the group eg. admin(level-0) is higher than agent(level - 5)
+         </mat-hint>
+         <mat-error *ngIf="formGroup.controls.name.invalid && formGroup.controls.name.errors.required">
+            Name is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Describe The Group</mat-label>
+         <textarea 
+            formControlName="description" 
+            matInput >
+         </textarea>
+      </mat-form-field>
+
+      <div class="permissions">
+         <h2>Permissions</h2>
+         <section class="content">          
+            <ul class="shipments">
+               <p>Shipments</p>
+               <li>
+                  <span>Read</span>
+                  <input type="checkbox" formControlName="readShipments">
+               </li>
+               <li>
+                  <span>Update</span>
+                  <input type="checkbox" formControlName="updateShipments">
+               </li>
+               <li>
+                  <span>Create</span>
+                  <input type="checkbox" formControlName="createShipments">
+               </li>
+               <li>
+                  <span>Delete</span>
+                  <input type="checkbox" formControlName="deleteShipments">
+               </li>
+            </ul>
+            <ul class="manifests">
+               <p>Manifests</p>
+               <li>
+                  <span>Read</span>
+                  <input type="checkbox" formControlName="readManifests">
+               </li>
+               <li>
+                  <span>Update</span>
+                  <input type="checkbox" formControlName="updateManifests">
+               </li>
+               <li>
+                  <span>Create</span>
+                  <input type="checkbox" formControlName="createManifests">
+               </li>
+               <li>
+                  <span>Delete</span>
+                  <input type="checkbox" formControlName="deleteManifests">
+               </li>
+            </ul>
+            <ul class="users">
+               <p>Users</p>
+               <li>
+                  <span>Read</span>
+                  <input type="checkbox" formControlName="readUsers">
+               </li>
+               <li>
+                  <span>Update</span>
+                  <input type="checkbox" formControlName="updateUsers">
+               </li>
+               <li>
+                  <span>Create</span>
+                  <input type="checkbox" formControlName="createUsers">
+               </li>
+               <li>
+                  <span>Delete</span>
+                  <input type="checkbox" formControlName="deleteUsers">
+               </li>
+            </ul>
+            <ul class="user-groups">
+               <p>User Groups</p>
+               <li>
+                  <span>Read</span>
+                  <input type="checkbox" formControlName="readGroups">
+               </li>
+               <li>
+                  <span>Update</span>
+                  <input type="checkbox" formControlName="updateGroups">
+               </li>
+               <li>
+                  <span>Create</span>
+                  <input type="checkbox" formControlName="createGroups">
+               </li>
+               <li>
+                  <span>Delete</span>
+                  <input type="checkbox" formControlName="deleteGroups">
+               </li>
+            </ul>
+            <ul class="others">
+               <li>
+                  <span>Update incomplete items</span>
+                  <input type="checkbox" formControlName="incomplete">
+               </li>
+               <li>
+                  <span>Update archived items</span>
+                  <input type="checkbox" formControlName="archived">
+               </li>
+            </ul>
+         </section>
+      </div>
+
+
+      <div class="btns">
+         <button type="submit" mat-flat-button color="primary">{{action == 'edit'?'Save':action}}</button>
+         <button 
+            type="button" 
+            mat-flat-button color="warn" 
+            (click)="onCancel()" 
+            *ngIf="action == 'edit'">
+            Cancel
+         </button>      
+      </div>
+      
+   </form>
+   
+</div>

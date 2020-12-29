@@ -1,0 +1,178 @@
+<div class="charts" >
+   <mat-card  class="main-chart ">
+      <div class="top">
+         <h3>Stats</h3>  
+         
+         <i class="fas fa-chart-bar"></i>
+      </div>
+      <div id="mainChart" class="chart">
+
+      </div>
+   </mat-card>
+   <mat-card class="feed ">
+      <div class="top">
+         <h3>Feed</h3>  
+         <div class="top-menu">
+            
+            <button title="change feed" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
+               <i class="fas fa-ellipsis-h menu-icon"></i>              
+            </button>
+            <h4>{{currentFeed}}</h4>
+            
+            
+            <mat-menu #menu="matMenu">
+            <button (click) = "onChangeFeed('company')" mat-menu-item>Company</button>
+            <button (click) = "onChangeFeed('branch')" mat-menu-item>My branch</button>
+            <button (click) = "onChangeFeed('group')" mat-menu-item>Group</button>
+            <button mat-menu-item [matMenuTriggerFor] ="colleagues">Colleague <i class="fas-fa-angle-down"></i></button>
+            </mat-menu>
+            <mat-menu #colleagues="matMenu">
+               <button mat-menu-item (click)="onChangeFeed('Jane doe')"class="colleague">
+                  <img class="avatar" src="../../../assets/user-f.jpg" alt="user">
+                  <span>Jane doe</span>
+               </button>
+            </mat-menu>
+         </div>     
+         <i class="fas fa-rss menu-icon"></i>
+      </div>
+      <div class="content"#feedsContainer id="feedsContainer">
+         <div 
+         *ngFor="let feed of feeds;index as i"
+         class="single-feed {{feed.userId == userId?'right':'left'}}">
+            <img [title]="feed.name" class="avatar" *ngIf="feed.profile" [src]="feed.profile" >
+            <span [title]="feed.name" class="avatar" *ngIf="!feed.profile">{{feed.name.trim()[0]}}</span>
+            <div class="feed-content ">
+               <p>{{feed.message}}</p>
+               <p *ngIf="feed.postedAt" class="posted-at">{{feed.postedAt}}</p>
+            </div>
+         </div>
+      </div>
+   </mat-card>
+   
+
+   
+   
+</div>
+<div class="stats" *ngIf="!isLoadingResults">
+   <mat-card color="primary" class="manifests card">
+      <section class="top">
+         <div class="start">
+            <h3>manifests</h3>
+            
+         </div>
+         <i class="fas fa-tasks"></i>
+      </section>
+      <section class="content">
+         <div class="category active">
+            <i class="fas fa-wave-square"></i>
+            <span>Active</span>
+            <button >{{counts.manifests.active}}</button>
+         </div>
+         
+         <div class="category shipping">
+            <i class="fas fa-plane-departure"></i>
+            <span>Shipping</span>
+            <button >{{counts.manifests.shipping}}</button>
+         </div>
+         <div class="category arrived">
+            <i class="fas fa-plane-arrival"></i>
+            <span>Arrived</span>
+            <button >{{counts.manifests.arrived}}</button>
+         </div>
+         <div class="category incomplete">
+            <i class="fas fa-star-half"></i>
+            <span>incomplete</span>
+            <button >{{counts.manifests.incomplete}}</button>
+         </div>
+         <div class="category archived">
+            <i class="fas fa-file-archive"></i>
+            <span>archived</span>
+            <button >{{counts.manifests.archived}}</button>
+         </div>
+
+      </section>
+   </mat-card>
+
+   <mat-card color="primary" class="shipments card">
+      <section class="top">
+         <div class="start">
+            <h3>shipments</h3>
+          
+            
+         </div>
+         <i class="fas fa-paper-plane"></i>
+      </section>
+      <section class="content">
+         <div class="category active">
+            <i class="fas fa-wave-square"></i>
+            <span>Active</span>
+            <button >{{counts.shipments.active}}</button>
+         </div>
+         
+         <div class="category shipping">
+            <i class="fas fa-plane-departure"></i>
+            <span>Shipping</span>
+            <button >{{counts.shipments.shipping}}</button>
+         </div>
+         <div class="category arrived">
+            <i class="fas fa-plane-arrival"></i>
+            <span>Arrived</span>
+            <button >{{counts.shipments.arrived}}</button>
+         </div>
+         <div class="category incomplete">
+            <i class="fas fa-star-half"></i>
+            <span>incomplete</span>
+            <button >{{counts.shipments.incomplete}}</button>
+         </div>
+         <div class="category archived">
+            <i class="fas fa-file-archive"></i>
+            <span>archived</span>
+            <button >{{counts.shipments.archived}}</button>
+         </div>
+
+      </section>
+   </mat-card>
+
+   <mat-card color="primary" class="users card">
+      <section class="top">
+         <div class="start">
+            <h3>users</h3>
+           
+            
+         </div>
+         <i class="fas fa-users"></i>
+      </section>
+      <section class="content">
+         <div class="category active">
+            <i class="fas fa-wave-square"></i>
+            <span>Active</span>
+            <button >{{counts.users.active}}</button>
+         </div>
+         
+         <div class="category archived">
+            <i class="fas fa-ban"></i>
+            <span>locked</span>
+            <button >{{counts.users.locked}}</button>
+         </div>
+      </section>
+   </mat-card>
+
+   <mat-card color="primary" class="groups card">
+      <section class="top">
+         <div class="start">
+            <h3>groups</h3>
+            
+            
+         </div>
+         <i class="fas fa-user-friends"></i>
+      </section>
+      <section class="content">  
+         <div class="category shipping">
+            <i class="fas fa-plane-departure"></i>
+            <span>all</span>
+            <button >{{counts.groups.all}}</button>
+         </div>
+      </section>
+   </mat-card>
+</div>
+

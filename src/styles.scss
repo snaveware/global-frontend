@@ -1,1 +1,388 @@
+// src\styles.scss
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+
+@include mat-core();
+
+// import our custom theme                // 👈 changed
+@import "./theme.scss";                   // 👈 changed
+                                          // 👈 changed
+// // import custom component themes         // 👈 changed
+// @import "./custom-component-themes.scss"; // 👈 changed
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+@include angular-material-theme($theming-material-components-theme);  // 👈 changed
+// @include custom-components-theme($theming-material-components-theme); // 👈 changed
+
+// 👇 added
+
+// Include the dark color styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
+
+.dark-theme {
+  @include angular-material-color($dark-theme);
+  --primary:#009688;
+  --accent: #ffeb3b;
+  --warn: #ff5722;
+  --bg:var(--deep-dark);
+  --bg-light:var(--dark);
+  --color:var(--white);
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+//@include angular-material-typography($typography);
+
+// 👆 added
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  --accent:#ff9800 ;
+  --primary:#00bcd4;
+  --white: #EFF5F7;
+  --warn:#ff5722;
+  --pink:#E91E63;
+  --purple:#3f51b5;
+  --dark:#4b616c;
+  --deep-dark:#37474f;
+  --black:#000;
+  --bg:white;
+  --bg-light:#EFF5F7;
+  --color:#37474f;
+  --green:#009688;
+}
+
+@keyframes rotate {
+  from{transform: rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+@keyframes color{
+  from{color:var(--primary);}
+  to{color:var(--accent);}
+}
+@keyframes bgColor{
+  from{background-color:var(--primary);width:0;}
+  to{background-color:var(--accent);width:100%}
+}
+
+
+
+
+.form{
+  padding:5px;
+  .title{
+    color: var(--primary);
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: capitalize;
+    opacity: 95%;
+  }
+  .input{
+    display: block;
+    width:90%;
+    margin:10px auto;
+  }
+  button{
+    display: block;
+    width:40%;
+    margin:20px auto;
+  }
+  .btns{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.edit,.create{
+  width:70%;
+  margin:30px auto;
+  background-color: var(--bg);
+  box-shadow: 1px 1px 1px var(--bg-light),-1px -1px 1px var(--bg-light);
+  border-radius: 3px;
+  padding:10px;
+  
+}
+
+
+
+    
+  .menu{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 15px;
+    box-shadow: 0 3px 4px var(--bg-light);
+    .start{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    color:var(--primary);
+    }
+    .first{
+      font-size:1.3rem;
+      opacity: 95%;
+      text-transform: capitalize;
+    }
+    .second{
+      font-size:0.9rem;
+      opacity: 80%;
+      
+    }
+  }
+
+  .menu:hover::before{
+    content: '';
+    height:100%;
+    width:8px;
+    background-color:var(--accent);
+    position: absolute;
+    left:0;
+    top:0;
+  }
+.table-container{
+  width:90%;
+  margin:10px auto;
+  position: relative;
+  .table{
+    width:100%;
+    margin:auto;
+    .table-actions-btn{
+      animation-name: color;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+  }
+  
+}
+.table-search{
+
+  .filter{
+    padding:10px;
+    display: block;
+    width:50%;
+    margin:10px auto;
+    input{
+      display: block;
+      width:100%;
+      margin: auto;
+    }
+  }
+}
+
+.more-from-db{
+  width:100%;
+  display:flex;
+  margin:10px auto;
+  justify-content: center;
+  align-items: center;  
+  button{
+    width:50%;
+    
+  }
+  
+}
+.loader{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100%;
+  z-index: 1000;
+}
+
+
+
+
+.clickable{
+  cursor: pointer; 
+}
+.clickable:hover{
+  opacity: 90%;
+}
+
+.m-dialog{
+  position: sticky;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  display: block;
+  padding: 20px;
+  width: max-content;
+  height: max-content;
+  background-color: var(--bg);
+  z-index: 10000;
+  box-shadow: 2px 2px 6px var(--primary),-2px -2px 6px var(--primary);
+  border-radius: 3px;
+  .title{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-transform: capitalize;
+    .title-icon{
+      font-size: 3rem;
+    }
+    .title-text{
+      font-size: 1.5rem;
+      
+    }
+    .isSuccess{
+      color: var(--green);
+    }
+    .isError{
+      color: var(--warn);
+    }
+    .isInfo{
+      color: var(--primary);
+    }
+  }
+  .message{
+    font-size: 0.9rem;
+    columns: var(--color);
+    opacity: 90%;
+  }
+
+  .actions{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+
+    button{
+      margin:5px;
+    }
+  }
+}
+.maximize{
+  position: absolute!important;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  min-width:90%;
+}
+
+.view{
+  width:80%;
+  margin:30px auto;
+
+  .group{
+    position: relative;
+    background-color: var(--bg);
+    box-shadow: 1px 1px 1px var(--bg-light),-1px -1px 1px var(--bg-light);
+    border-radius: 3px;
+    margin:20px auto;
+  }
+  .content,.content div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    padding:5px;
+  }
+  .content div{
+    border-top: 1px solid var(--bg-light);
+    font-size: 0.9rem;
+    color: var(--color);
+    .property{
+      i{
+        color: var(--primary);
+        margin: 5px;
+      }
+      span{
+        opacity: 80%;
+      }
+    
+    }
+    .value{
+      opacity: 90%;
+    }
+  }
+}
+
+.grid-view{
+  display: grid;
+  max-width: 95%;
+  grid-template-columns: 8fr 2fr;
+  grid-gap: 10px;
+  margin:auto;
+  .view{
+    min-width:98%;
+    margin: auto;
+  }
+  .view-actions{
+    width:98%;
+    margin:30px auto;
+    .action{
+      display: block;
+      width: 100%;
+      padding: 5px;
+      margin:3px auto;
+      text-transform: capitalize;
+      i{
+        margin: 5px;
+      }
+    }
+    h3{
+      text-align: center;
+      color: var(--primary);   
+    }
+  }
+
+}
+
+@media only screen and (max-width:600px){
+  .edit,.create{
+    width:100%;
+    padding:5px;
+  }
+  .user{
+    width:100%;
+  }
+  .filter{
+    width: 90%;
+    margin:auto
+  }
+  .view{
+    width:98%;
+    .content,.content div{
+      display:block;
+      width:98%;
+      margin:5px auto;
+      padding:5px;
+    }
+    
+  }
+  .grid-view{
+    display: unset;
+    min-width: unset;
+  }
+}
+

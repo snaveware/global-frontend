@@ -1,0 +1,114 @@
+<div class="form">
+
+   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+      <h2 *ngIf="action == 'create'" class="title">Manifest</h2>
+      <mat-form-field class="input">
+         <mat-label>Origin</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="source">
+         <mat-hint >
+         where the goods are being shipped from
+         </mat-hint> 
+         <mat-error *ngIf="formGroup.controls.source.invalid && formGroup.controls.source.errors.required">
+            Origin is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Destination</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="destination">
+
+         <mat-hint >
+            Where the goods are being shipped to
+         </mat-hint> 
+
+         <mat-error *ngIf="formGroup.controls.destination.invalid && formGroup.controls.destination.errors.required">
+            Destination is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Carrier</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="shipperName">
+
+         <mat-hint >
+            who will ship the goods?
+         </mat-hint> 
+
+         <mat-error *ngIf="formGroup.controls.shipperName.invalid && formGroup.controls.shipperName.errors.required">
+            Name of the carrier is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Carrier Contact(s)</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="shipperContact">
+
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Departure</mat-label>
+         <input 
+         matInput 
+         formControlName="departure"
+         [matDatepicker]="departurePicker">
+
+         <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
+         <mat-datepicker #departurePicker></mat-datepicker>
+         <mat-hint >
+            Departure date. You can fill this later
+         </mat-hint> 
+
+      </mat-form-field>
+
+      
+
+      <mat-form-field class="input">
+         <mat-label>Arrival</mat-label>
+         <input 
+         matInput 
+         formControlName="arrival"
+         [matDatepicker]="arrivalPicker">
+         <mat-datepicker-toggle matSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
+         <mat-datepicker #arrivalPicker></mat-datepicker>
+         <mat-hint >
+            Arrival date. You can fill this later
+         </mat-hint> 
+      </mat-form-field>
+
+
+      <mat-form-field class="input">
+         <mat-label>Describe The Manifest</mat-label>
+         <textarea 
+            formControlName="description" 
+            matInput 
+            placeholder="Ex. contains fragile shipments...">
+         </textarea>
+      </mat-form-field>
+      <div class="btns">
+         <button type="submit" mat-flat-button color="primary">{{action == 'edit'?'save':action}}</button>
+         <button 
+            type="button" 
+            mat-flat-button color="warn" 
+            (click)="onCancel()" 
+            *ngIf="action == 'edit'">
+            Cancel
+         </button>      
+      </div>
+      
+   </form>
+   
+
+   
+</div>

@@ -1,0 +1,35 @@
+<div class="header">
+   <img class="cover-pic" *ngIf="!mobile" src="../../../../assets/landscape.jpg" alt="cover">
+   <img class="cover-pic" *ngIf="mobile" src="../../../../assets/ocean-view.jpg" alt="cover">
+   <div class="content">
+      <div class="profile-container">
+         <div class="profile" *ngIf="showProfile"> 
+            <img [src]="userProfileUrl" alt="profile" class="profile-pic">
+         </div>
+         <div class="user-details">
+            <h3>{{userNames}}</h3>
+            <h4>{{userGroup}}</h4>
+           
+            <button mat-flat-button color="primary" (click) ="onChangeProfile()">
+               <i class="fas fa-pen"></i>
+               <span>
+                  Profile
+               </span>
+            </button>
+            <input style="display:none" type="file" #upload (change) = "onUpload($event.target.files[0])">
+           
+         </div>
+         
+      </div>
+      <div class="comms">
+         <button mat-flat-button color="primary">
+            <i class="fas fa-comment-alt"></i>
+            <span>message</span>
+         </button>
+         <button mat-flat-button color="primary">
+            <i class="fas fa-envelope"></i>
+            <span>Email</span>
+         </button> 
+      </div>
+   </div>
+</div>

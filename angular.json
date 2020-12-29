@@ -24,13 +24,19 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
+              "src/favicon.png",
               "src/assets"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "core-js",
+              "raf",
+              "xlsx",
+              "@babel/runtime"
+            ]
           },
           "configurations": {
             "production": {

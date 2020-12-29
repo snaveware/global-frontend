@@ -1,0 +1,15 @@
+.view-actions{
+   position: relative !important;
+}
+.email{
+   position: absolute;
+   right:0;
+   top:0;
+   width: max-content;
+   height: max-content;
+   min-width: 300px;
+   min-height: 300px;
+   padding: 5px;
+   background-color: var(--bg);
+   box-shadow: 1px 1px 2px var(--bg-light),-1px -1px 2px var(--primary);
+}

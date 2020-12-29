@@ -3,8 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  BACKEND_BASE_URL: 'http://localhost:5000',
+  BATCH_COUNT:10
+
 };
+
+//BACTCH_COUNT is the number of items that will be requested from the database in a single request
+
 
 /*
  * For easier debugging in development mode, you can import the following file

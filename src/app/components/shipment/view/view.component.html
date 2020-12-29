@@ -1,0 +1,332 @@
+
+
+<div class="grid-view">
+   <div class="view">
+      <app-dialog
+         [message] ="warningMessage"
+         *ngIf="showWarning"
+         action = 'error'
+         (selected) = "closeDialog($event)">
+      </app-dialog>
+
+      <app-dialog
+      [message] ="promptMessage"
+      *ngIf="showReleasePrompt"
+      action = 'confirm'
+      (selected) = "onReleasePrompt($event)">
+      </app-dialog>
+
+      <app-dialog
+         [message] ="promptMessage"
+         *ngIf="showDeletePrompt"
+         action = 'confirm'
+         (selected) = "onDeletePrompt($event)">
+      </app-dialog>
+
+     
+      <div class="loader" *ngIf="isLoadingResults" >
+            <mat-spinner ></mat-spinner> 
+      </div>
+      <div *ngIf="!isLoadingResults  && shipment && action == 'view'" class="personal-info group">
+         <section class="menu">
+            <div class="start">
+               <span class="first">Important Details </span>
+            </div>
+            <button (click)="action  = 'edit'" mat-fab color="primary">
+               <i class="fas fa-pen"></i>
+            </button>
+         </section>
+         <section class="content">
+
+            <div class="Tracking Id">
+               <span class="property">
+                  <i class="fas fa-list-ol">&nbsp;</i>
+                  <span>Tracking Id</span>
+               </span>
+               
+               <span class="value">
+                  {{shipment.trackingId}}
+               </span>
+               
+            </div>
+            <div class="title">
+               <p class="property">
+                  <i class="fas fa-heading">&nbsp;</i>
+                  <span>Title</span>
+               </p>
+            
+               <span class="value">
+                  {{shipment.title}} 
+               </span>
+               
+            </div>
+
+            <div class="customer">
+               <p class="property">
+                  <i class="fas fa-user">&nbsp;</i>
+                  <span>Customer</span>
+               </p>
+            
+               <span class="value">
+                  {{shipment.customerName}} 
+               </span>
+               
+            </div>
+
+            <div class="customer">
+               <p class="property">
+                  <i class="fas fa-mobile">&nbsp;</i>
+                  <span>Customer Telephone</span>
+               </p>
+            
+               <span class="value">
+                  {{shipment.customerTelephone}} 
+               </span>
+               
+            </div>
+
+            <div class="CBM">
+               <p class="property">
+                  <i class="fas fa-cube">&nbsp;</i>
+                  <span>CBM</span>
+               </p>
+            
+               <span class="value">
+                  {{shipment.CBM}}
+               </span>
+               
+            </div>
+            <div class="cost">
+               <p class="property">
+                  <i class="fas fa-file-invoice-dollar">&nbsp;</i>
+                  <span>Cost</span>
+               </p>
+               
+               <span class="value">
+                  {{shipment.totalCost}}
+               </span>  
+            </div>
+
+            <div class="paid">
+               <p class="property">
+                  <i class="fas fa-credit-card">&nbsp;</i>
+                  <span>Paid</span>
+               </p>
+               
+               <span class="value">
+                  {{shipment.amountPaid}}
+               </span>  
+            </div>
+
+            <div class="currency">
+               <p class="property">
+                  <i class="fas fa-dollar-sign">&nbsp;</i>
+                  <span>Currency</span>
+               </p>
+               
+               <span class="value">
+                  {{shipment.currency}}
+               </span>  
+            </div>
+
+            <div class="status">
+               <p class="property">
+                  <i class="fas fa-question-circle">&nbsp;</i>
+                  <span>Status</span> 
+               </p>
+               <span class="value">
+                  {{shipment.status}}
+               </span>
+            </div>
+            <div class="picked">
+               <p class="property">
+                  <i class="fas fa-truck-loading">&nbsp;</i>
+                  <span>Picked</span> 
+               </p>
+               <span class="value">
+                  {{shipment.picked?'Yes':'No'}}
+               </span>
+            </div>
+         </section>
+
+      
+      </div>
+
+      <div *ngIf="!isLoadingResults && shipment && action == 'edit'" class="edit">
+         <section class="menu">
+            <div class="start">
+               <span>Important details</span>
+            </div>
+            <button (click)="action = 'view'" mat-fab color="primary">
+               <i class="fas fa-times"></i>
+            </button>
+         </section>
+         <app-shipment-form
+            action="edit"
+            (edited) = "onUpdate($event)"
+            [originalShipmentData]="shipment">
+      
+         </app-shipment-form>
+      </div>
+      
+
+      <div *ngIf="!isLoadingResults  && manifest" class="manifest group">
+         <app-dialog
+         *ngIf="showManifestSelectionDialog"
+         action = 'manifests'
+         (selectedManifest) = "onSelectedManifest($event)"
+         (selected) = "onOtherSelection($event)">
+      </app-dialog>
+         <section class="menu">
+            <div class="start">
+               <span class="first">Manifest</span>
+            </div>
+            <button title="change" (click)="onChangeManifest()" mat-fab color="primary">
+               <i class="fas fa-pen"></i>
+            </button>
+         </section>
+         <section class="content">
+            
+            <div class="trackingId">
+               <span class="property">
+                  <i class="fas fa-list-ol">&nbsp;</i>
+                  <span>Tracking Id</span>
+               </span>
+               
+               <span class="value">
+                  {{manifest.trackingId}}
+               </span>
+               
+            </div>
+
+            <div class="source">
+               <span class="property">
+                  <i class="fas fa-plane-departure">&nbsp;</i>
+                  <span>Source</span>
+               </span>
+               
+               <span class="value">
+                  {{manifest.source}}
+               </span>
+               
+            </div>
+            <div class="destination">
+               <p class="property">
+                  <i class="fas fa-plane-arrival">&nbsp;</i>
+                  <span>Destination</span>
+               </p>
+            
+               <span class="value">
+                  {{manifest.destination}} 
+               </span>
+               
+            </div>
+
+            <div class="departure">
+               <p class="property">
+                  <i class="fas fa-plane-departure">&nbsp;</i>
+                  <span>Departure</span>
+               </p>
+            
+               <span class="value">
+                  {{manifest.departureLocal}} 
+               </span>   
+            </div>
+
+            <div class="arrival">
+               <p class="property">
+                  <i class="fas fa-plane-arrival">&nbsp;</i>
+                  <span>arrival</span>
+               </p>
+            
+               <span class="value">
+                  {{manifest.arrivalLocal}} 
+               </span>   
+            </div>
+
+            <div class="carrier">
+               <p class="property">
+                  <i class="fas fa-dolly">&nbsp;</i>
+                  <span>carrier</span>
+               </p>
+            
+               <span class="value">
+                  {{manifest.shipperName}}
+               </span>
+               
+            </div>
+            <div class="contacts">
+               <p class="property">
+                  <i class="fas fa-mobile">&nbsp;</i>
+                  <span>Carrier Contact</span>
+               </p>
+               
+               <span class="value">
+                  {{manifest.shipperContact}}
+               </span>  
+            </div>
+
+            <div class="agent">
+               <p class="property">
+                  <i class="fas fa-mobile">&nbsp;</i>
+                  <span>Agent</span>
+               </p>
+               
+               <span class="value">
+                  {{manifest.agentName}}
+               </span>  
+            </div>
+
+            <div class="telephone">
+               <p class="property">
+                  <i class="fas fa-mobile">&nbsp;</i>
+                  <span>Agent Telephone</span>
+               </p>
+               
+               <span class="value">
+                  {{manifest.agentTelephone}}
+               </span>  
+            </div>
+
+
+            <div class="status">
+               <p class="property">
+                  <i class="fas fa-question-circle">&nbsp;</i>
+                  <span>Status</span> 
+               </p>
+               <span class="value">
+                  {{manifest.status}}
+               </span>
+            </div>
+           
+         </section>
+      </div>
+   </div>
+ 
+   <div class="view-actions" *ngIf="!isLoadingResults && shipment">
+    
+      <h3 class="action">Actions</h3>
+      <button mat-flat-button class="action" color="primary" (click) ="onUpdate({amountPaid:shipment.totalCost})">
+         <i class="fas fa-credit-card"></i>
+         <span title="pays the shipment fully">Pay Fully</span>
+      </button>
+
+      <button class="action" mat-flat-button color="primary" (click) ="onRelease()">
+         <i class="fas fa-truck-loading"></i>
+         <span>Release to owner</span>
+      </button>
+      
+      <!-- <button mat-flat-button class="action" color="primary" (click) ="onPdf()">
+         <i class="fas fa-file-pdf"></i>
+         <span>Pdf</span>
+      </button>
+      <button mat-flat-button class="action" color="primary" (click) ="onEmail()">
+         <i class="fas fa-envelope"></i>
+         <span>Email</span>
+      </button> -->
+      <button mat-flat-button class="action" color="primary" (click) ="onDelete()">
+         <i class="fas fa-trash"></i>
+         <span>Delete</span>
+      </button>
+   </div>
+</div>

@@ -1,0 +1,35 @@
+
+<div class="home">
+   <app-dialog
+      *ngIf="showWarning"
+      [action] = "dialogAction"
+      [message]="warnMessage"
+      (selected) = "closeDialog($event)">
+   </app-dialog>
+   <app-dialog
+         [message] ="promptMessage"
+         *ngIf="showDeletePrompt"
+         action = 'confirm'
+         (delete) ="onDelete($event)"
+         (selected) = "onDeletePrompt($event)">
+      </app-dialog>
+   
+   <div class="loader" *ngIf="isLoadingResults" >
+         <mat-spinner ></mat-spinner> 
+   </div>
+
+   <app-manifest-table
+      *ngIf="!isLoadingResults"
+      display="home"
+      [manifests]="manifests"
+      (delete) ="onDelete($event)"
+      (generatePdf) ="onGeneratePdf($event)">
+   </app-manifest-table>
+   
+   <!-- <div class="more-from-db">
+      <button (click)="onLoadMore()" mat-flat-button  color="primary" >
+         Load More Manifests
+      </button>
+   </div> -->
+   
+</div>

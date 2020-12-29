@@ -1,0 +1,52 @@
+<div>
+   <mat-form-field class="input">
+      <mat-label>To</mat-label>
+      <input 
+         type="email"    
+         placeholder="email@example.com" 
+         matInput
+         [matAutocomplete]="auto"
+         [formControl] = "emailControl" 
+      >
+      
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let email of filteredEmails | async" [value]="email">
+          {{email}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="emailControl.invalid && emailControl.errors.required">
+         Email is required
+      </mat-error>
+      <mat-error *ngIf="emailControl.invalid && emailControl.errors.email">
+         Your email is invalid
+      </mat-error>
+    </mat-form-field>
+
+   <mat-form-field class="input">
+      <mat-label>Subject</mat-label>
+      <input matInput ngModel #subject="ngModel">
+   </mat-form-field>
+
+   <mat-form-field class="input">
+      <mat-label>Message</mat-label>
+      <textarea 
+         ngModel
+         #message="ngModel"
+         matInput >
+      </textarea>
+   </mat-form-field>
+   <button 
+      class="submit-btn" 
+      mat-flat-button 
+      color="primary" 
+      (click)="onSubmit({email:emailControl.value,subject:subject.control.value,message:message.control.value})">
+      Send
+   </button>
+   <button 
+   class="submit-btn" 
+   mat-flat-button 
+   color="warn" 
+   (click)="onCancel()">
+   Cancel
+</button>
+</div>

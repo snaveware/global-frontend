@@ -1,0 +1,261 @@
+
+<div class="view">
+   <app-dialog
+      [message] ="warningMessage"
+      *ngIf="showWarning"
+      action = 'error'
+      (selected) = "closeDialog($event)">
+   </app-dialog>
+
+   <div class="loader" *ngIf="isLoadingResults" >
+         <mat-spinner ></mat-spinner> 
+   </div>
+   <div *ngIf="!isLoadingResults  && group && action == 'view'" class="personal-info group">
+      <section class="menu">
+         <div class="start">
+            <span class="first">Important Details </span>
+         </div>
+         <button (click)="action ='edit'" mat-fab color="primary">
+            <i class="fas fa-pen"></i>
+         </button>
+      </section>
+      <section class="content">
+
+         <div class="name">
+            <span class="property">
+               <i class="fas fa-user-friends">&nbsp;</i>
+               <span>Name</span>
+            </span>
+            
+            <span class="value">
+               {{group.name}} 
+            </span>
+            
+         </div>
+         <div class="level">
+            <p class="property">
+               <i class="fas fa-sort-amount-up">&nbsp;</i>
+               <span>Level</span>
+            </p>
+            
+            <span class="value">
+               {{group.level}} 
+            </span>
+            
+         </div>
+         
+      </section>
+
+   
+   </div>
+   <div *ngIf="action == 'view' && group && !isLoadingResults" class="group">
+      <section class="menu">
+         <div class="start">
+            <span class="first">Permissions </span>
+         </div>
+         <!-- <button (click)="action ='edit'" mat-fab color="primary">
+            <i class="fas fa-pen"></i>
+         </button> -->
+      </section>
+      <section class="content" >
+         <div>
+            <span class="property">
+               <span>Create Manifests</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.manifests[0]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+
+         <div >
+            <span class="property">
+               <span>View Manifests</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.manifests[1]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Update Manifests</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.manifests[2]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Delete Manifests</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.manifests[3]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+
+         <div >
+            <span class="property">
+               <span>Create Shipments</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.shipments[0]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>View Shipments</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.shipments[1]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Update Shipments</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.shipments[2]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Delete Shipments</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.shipments[3]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Create Users</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.users[0]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>View Users</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.users[1]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Update Users</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.users[2]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Delete Users</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.users[3]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Create Groups</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.groups[0]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>View Groups</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.groups[1]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Update Groups</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.groups[2]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Delete Groups</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.groups[3]?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Update All Incomplete Items</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.incomplete?'Yes':'No'}} 
+            </span>
+            
+         </div>
+         <div >
+            <span class="property">
+               <span>Update All Archived Items</span>
+            </span>
+            
+            <span class="value">
+               {{group.permissions.archived?'Yes':'No'}} 
+            </span>
+            
+         </div>
+      </section>
+   </div>
+   <div *ngIf="!isLoadingResults && group && action == 'edit'" class="edit" >
+      <section class="menu">
+         <div class="start">
+            <span>Important details </span>
+         </div>
+         <button (click)="action = 'view'" mat-fab color="primary">
+            <i class="fas fa-times"></i>
+         </button>
+      </section>
+      <app-group-form
+         action="edit"
+         (edited) = "onUpdate($event)"
+         [originalGroupData] = "group">
+   
+      </app-group-form>
+   </div>
+</div>

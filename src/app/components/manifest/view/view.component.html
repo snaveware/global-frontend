@@ -1,0 +1,225 @@
+
+<div class="grid-view">
+   <div class="view">
+      <app-dialog
+         [message] ="warningMessage"
+         *ngIf="showWarning"
+         [action] = "warningAction"
+         (selected) = "closeDialog($event)">
+      </app-dialog>
+
+      <app-dialog
+         [message] ="promptMessage"
+         *ngIf="showDeletePrompt"
+         action = 'confirm'
+         (selected) = "onDeletePrompt($event)">
+      </app-dialog>
+
+      
+
+      <div class="loader" *ngIf="isLoadingResults || loading" >
+            <mat-spinner ></mat-spinner> 
+      </div>
+      <div *ngIf="!isLoadingResults  && manifest && action=='view'" class="important-details group">
+         <section class="menu">
+            <div class="start">
+               <span class="first">Important Details </span>
+            </div>
+            <button (click)="action='edit'" mat-fab color="primary">
+               <i class="fas fa-pen"></i>
+            </button>
+         </section>
+         <section class="content">
+
+            
+            <div class="trackingId">
+               <span class="property">
+                  <i class="fas fa-list-ol">&nbsp;</i>
+                  <span>Tracking Id</span>
+               </span>
+               
+               <span class="value">
+                  {{manifest.trackingId}}
+               </span>
+               
+            </div>
+
+            <div class="source">
+               <span class="property">
+                  <i class="fas fa-plane-departure">&nbsp;</i>
+                  <span>Source</span>
+               </span>
+               
+               <span class="value">
+                  {{manifest.source}}
+               </span>
+               
+            </div>
+            <div class="destination">
+               <p class="property">
+                  <i class="fas fa-plane-arrival">&nbsp;</i>
+                  <span>Destination</span>
+               </p>
+            
+               <span class="value">
+                  {{manifest.destination}} 
+               </span>
+               
+            </div>
+
+            <div class="departure">
+               <p class="property">
+                  <i class="fas fa-plane-departure">&nbsp;</i>
+                  <span>Departure</span>
+               </p>
+            
+               <span class="value">
+                  {{manifest.departureLocal}} 
+               </span>   
+            </div>
+
+            <div class="arrival">
+               <p class="property">
+                  <i class="fas fa-plane-arrival">&nbsp;</i>
+                  <span>arrival</span>
+               </p>
+            
+               <span class="value">
+                  {{manifest.arrivalLocal}} 
+               </span>   
+            </div>
+
+            <div class="carrier">
+               <p class="property">
+                  <i class="fas fa-dolly">&nbsp;</i>
+                  <span>carrier</span>
+               </p>
+            
+               <span class="value">
+                  {{manifest.shipperName}}
+               </span>
+               
+            </div>
+            <div class="contacts">
+               <p class="property">
+                  <i class="fas fa-mobile">&nbsp;</i>
+                  <span>Carrier Contact</span>
+               </p>
+               
+               <span class="value">
+                  {{manifest.shipperContact}}
+               </span>  
+            </div>
+
+            <div class="agent">
+               <p class="property">
+                  <i class="fas fa-mobile">&nbsp;</i>
+                  <span>Agent</span>
+               </p>
+               
+               <span class="value">
+                  {{manifest.agentName}}
+               </span>  
+            </div>
+
+            <div class="telephone">
+               <p class="property">
+                  <i class="fas fa-mobile">&nbsp;</i>
+                  <span>Agent Telephone</span>
+               </p>
+               
+               <span class="value">
+                  {{manifest.agentTelephone}}
+               </span>  
+            </div>
+
+
+            <div class="status">
+               <p class="property">
+                  <i class="fas fa-question-circle">&nbsp;</i>
+                  <span>Status</span> 
+               </p>
+               <span class="value">
+                  {{manifest.status}}
+               </span>
+            </div>
+         </section>
+      </div>
+      <div *ngIf="!isLoadingResults  && manifest && action=='edit'" class="edit">
+         <section class="menu">
+            <div class="start">
+               <span>personal info </span>
+            </div>
+            <button (click)="action = 'view'" mat-fab color="primary">
+               <i class="fas fa-times"></i>
+            </button>
+         </section>
+         <app-manifest-form
+            action="edit"
+            (edited) = "onUpdate($event)"
+            [originalManifestData]='manifest'>
+      
+         </app-manifest-form>
+      </div>
+
+      <div *ngIf="!isLoadingResults  && shipments" class="shipments group">
+
+         <section class="menu">
+            <div class="start">
+               <span class="first">Shipments</span>
+            </div>
+            <button title="edit" (click)="onAddShipment()" mat-fab color="primary">
+               <i title="add" class="fas fa-plus" ></i>
+            </button>
+         </section>
+
+         <section >
+            <app-dialog
+               *ngIf="showShipmentsSelectionDialog"
+               action = 'shipments'
+               (selectedShipment) = "onSelectedShipment($event)"
+               (selected) = "onOtherSelection($event)">
+            </app-dialog>
+            <app-shipment-table
+               display='view'
+               [shipments]= "shipments">
+
+            </app-shipment-table>
+         </section>
+      </div>
+   </div>
+
+   <div class="view-actions">
+     
+      <h3 class="action">Actions</h3>
+      <button class="action" mat-flat-button color="primary" (click) ="onComplete()">
+         <i class="fas fa-plane-departure"></i>
+         <span title="changes the status to complete">Complete For Shipping</span>
+      </button>
+      <button mat-flat-button class="action" color="primary" (click) ="onArrived()">
+         <i class="fas fa-plane-arrival"></i>
+         <span title="changes the status to arrived">Mark As arrived</span>
+      </button>
+      <button mat-flat-button class="action" color="primary" (click) ="onGeneratePdf()">
+         <i class="fas fa-file-pdf"></i>
+         <span>Pdf</span>
+      </button>
+      <button mat-flat-button class="action" color="primary" (click) ="onEmail()">
+         <i class="fas fa-envelope"></i>
+         <span>Email</span>
+      </button>
+     
+      <button mat-flat-button class="action" color="primary" (click) ="onDelete()">
+         <i class="fas fa-trash"></i>
+         <span>Delete</span>
+      </button>
+      <div class="email" *ngIf="prepareEmail">
+         <app-email   
+            (send) = "sendEmail($event)"
+            (cancel) ="cancelEmail($event)">
+
+         </app-email>
+      </div>
+      
+   </div>
+</div>   

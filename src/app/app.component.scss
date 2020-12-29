@@ -1,0 +1,115 @@
+.app{
+   min-width: 100%;
+   min-height: 100vh;
+   margin:0;
+   padding:0;
+   background-color: var(--bg-light)!important;
+   .loader{
+      width:100%;
+      position: fixed;
+      top:0;
+      height: 3px;
+      z-index: 10000;
+   }
+   .load{
+      animation-name:bgColor;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+      
+   }
+   .theme{
+      position: fixed;
+      top:50%;
+      right:0%;
+      transform: translateY(-50%);
+      border-radius: 30px 0 0 30px !important;
+      width:20px;
+      height: 50px;
+      z-index:10000;
+      .theme-icon{
+         animation-name:rotate;
+         animation-duration: 1s;
+         animation-iteration-count: infinite;
+      }
+         
+   }
+   
+  
+
+   .welcome {
+      .content{
+         position:absolute;
+         z-index:100;
+         width:90%;
+         display:flex;
+         justify-content:space-between;
+         align-items: center;
+         padding:20px;
+         
+         .page h1{
+            font-size: 1.5rem;
+            color: var(--white);
+
+         }
+         .page h2{
+            font-size: 0.9rem;
+            color: var(--white);
+            margin:0;
+         }
+         .nav{
+            color:var(--white);
+            font-size: 1rem;
+         }
+         .nav i,.nav span{
+            margin:5px;
+         }
+         .nav .home-link{
+            color: var(--white)
+         }
+         
+         h1,h2,span{
+            text-transform: capitalize;
+         }
+      }
+
+   }
+   
+   .welcome{
+      position: relative;
+      height:130px;
+      width:100%;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+   }
+   .welcome::after{
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary);
+      opacity: 30%;
+      position: absolute;
+   }
+   .bg-img{
+      display: block;
+      width:100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+   }
+
+}
+
+@media only screen and (max-width:600px){
+   .content {
+      display:flex;
+      justify-content:center;
+      align-items: flex-start;
+      flex-direction: column;
+   }
+}
+
+

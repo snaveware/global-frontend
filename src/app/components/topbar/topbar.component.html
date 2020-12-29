@@ -1,0 +1,41 @@
+<div class="topbar">
+   <div class="start">
+     <div class="logo">
+       <a [routerLink] = "['/']" routerLinkActive ="router-link-active">
+        <img src="../assets/logo.png" alt="Global Inc.">
+      </a>     
+     </div>
+     <div class="actions">
+       <button
+       (click)= "onToggleSidebar()"
+       mat-flat-button
+       color="primary">
+       <i class="fas fa-bars"></i>
+       </button>
+       <button
+       (click) = "onToggleFullscreen()"
+       mat-flat-button
+       color="primary">
+       <i class="fas fa-expand-arrows-alt"></i>
+     </button>
+     </div>
+   </div>
+   <div *ngIf="loggedIn" class="user">
+     <button 
+       class="user-details" 
+       mat-flat-button 
+       color="primary"
+       (click)="onShowTopbarUserActions()">
+       <img class="avatar" [src]="userProfileUrl" alt="">
+       <span>{{userNames}}</span>
+       <i 
+       class="fas fa-angle-down"
+       >
+       </i>
+     </button>
+     <div class="actions" *ngIf="showTopbarUserActions"(click)="showTopbarUserActions = false">
+       <a (click) ="onMyAccount()" routerLinkActive="router-link-active"  class="action"><i class="fas fa-user"></i> Profile</a>
+       <a (click) = "onLogout()" class="action"><i class=" logout fas fa-power-off" ></i> Logout</a>
+     </div>
+   </div>
+</div>

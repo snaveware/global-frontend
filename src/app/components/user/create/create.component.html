@@ -1,0 +1,12 @@
+<div class="create">
+   <app-dialog
+      *ngIf="showWarning"
+      [action] = "dialogAction"
+      [message]="warningMessage"
+      (selected) = "closeDialog($event)">
+   </app-dialog>
+   <app-user-form
+   (created) ="onSubmit($event)"
+   ></app-user-form>
+</div>
+

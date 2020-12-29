@@ -1,0 +1,47 @@
+<div class="m-dialog"[class.maximize]="action == 'shipments' || action == 'manifests'">
+   <h2 class="title">
+      <i *ngIf="action == 'error' || action == 'confirm'" class="fas fa-exclamation-circle title-icon isError"  ></i>
+      <i *ngIf="action == 'success'" class="fas fa-check-circle title-icon isSuccess"></i>
+      <i *ngIf="action == 'info'" class="fas fa-check-circle title-icon isInfo"></i>
+      
+      <h3 
+         class="title-text" 
+         [class.isError]="action == 'error'" 
+         [class.isSuccess] ="action == 'success'">
+         {{action}}
+      </h3>
+      
+   </h2>
+   <div class="message" >
+      <p *ngIf="(action != 'manifests' && action != 'shipments') || showError">{{message}}</p> 
+     
+      <div class="loader" *ngIf="isLoadingResults" >
+         <mat-spinner ></mat-spinner> 
+      </div>
+      
+      <app-shipment-table
+         *ngIf="action == 'shipments' && !isLoadingResults"
+         [shipments] ="shipments"
+         display="select"
+         (selected) = "onSelectShipment($event)">
+
+      </app-shipment-table>
+
+      <app-manifest-table
+         *ngIf="action == 'manifests' && !isLoadingResults"
+         display="select"
+         [manifests] = 'manifests'
+         (selected) = "onSelectManifest($event)">
+
+      </app-manifest-table>
+   </div>
+   
+   <div class="actions">
+      <button mat-flat-button color="primary" (click)="onSelect(true)" *ngIf="action == 'confirm'">Yes</button>
+      <button mat-flat-button color="warn"  (click)="onSelect(false)" *ngIf="action == 'confirm'" >No</button>
+      <button mat-flat-button color="primary" (click)="onSelect(true)" *ngIf="action != 'confirm'" >Okey</button>
+      <button mat-flat-button color="primary" (click)="onSelect(true)">Close</button>
+   
+   </div>
+</div>
+

@@ -1,0 +1,154 @@
+<div class="form">
+   
+   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" style="position:relative;">
+      <h2 *ngIf="action == 'create'" class="title">Shipment</h2>
+      <app-dialog
+         *ngIf="showManifestSelectionDialog"
+         action = 'manifests'
+         (selectedManifest) = "onSelectedManifest($event)"
+         (selected) = "onOtherSelection($event)">
+      </app-dialog>
+      <mat-form-field class="input">
+         <mat-label>Title</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="title"
+         placeholder="Ex. black samsung galaxy S10+">
+         <mat-hint >
+         In a few words name the shipment
+         </mat-hint> 
+         <mat-error *ngIf="formGroup.controls.title.invalid && formGroup.controls.title.errors.required">
+            Title is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>CBM</mat-label>
+         <input 
+         matInput 
+         type="number"
+         formControlName="CBM"
+         placeholder="Ex. 10">
+         
+         <mat-hint >
+            Enter calculated Cubic Meters
+         </mat-hint> 
+
+         <mat-error *ngIf="formGroup.controls.CBM.invalid && formGroup.controls.CBM.errors.required">
+            CBM is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Total Cost</mat-label>
+         <input 
+         matInput 
+         type="number"
+         formControlName="totalCost"
+         placeholder="Ex. 1000">
+         
+         <mat-hint >
+            Total cost for shipping
+         </mat-hint> 
+
+         <mat-error *ngIf="formGroup.controls.totalCost.invalid && formGroup.controls.totalCost.errors.required">
+            Total cost is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Amount Paid</mat-label>
+         <input 
+         matInput 
+         type="number"
+         formControlName="amountPaid"
+         placeholder="Ex. 100">
+         
+         <mat-hint >
+            leave as zero if its not paid for
+         </mat-hint> 
+
+         <mat-error *ngIf="formGroup.controls.amountPaid.invalid && formGroup.controls.amountPaid.errors.required">
+            Amount paid is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Currency</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="currency"
+         placeholder="Ex. USD">
+         
+         <mat-hint >
+            Three characters representing the currency
+         </mat-hint> 
+
+         <mat-error *ngIf="formGroup.controls.currency.invalid && formGroup.controls.currency.errors.required">
+            Currency is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Customer</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="customerName"
+         placeholder="Ex. Jane Doe">
+
+         <mat-hint >
+            Who does the shipment belong to
+         </mat-hint> 
+
+         <mat-error *ngIf="formGroup.controls.customerName.invalid && formGroup.controls.customerName.errors.required">
+            Customer name is required
+         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+         <mat-label>Customer Contact(s)</mat-label>
+         <input 
+         matInput 
+         type="text"
+         formControlName="customerTelephone">
+      </mat-form-field>
+      
+      <div class="input select-manifest" *ngIf="action == 'create'">
+        
+         <mat-label>Select manifest</mat-label>
+         <p class="manifest-input">
+            <span>{{selectedManifest}}</span>
+            <button title="select" type="button" mat-fab color="primary" (click)="onChangeManifest()"><i class="fas fa-pen"></i></button>
+         </p>
+         
+         <mat-hint>
+            Select a manifest for this shipment
+         </mat-hint> 
+      </div>
+     
+     
+      <mat-form-field class="input">
+         <mat-label>Describe The Shipment</mat-label>
+         <textarea 
+            formControlName="description" 
+            matInput 
+            placeholder="Ex. contains fragile shipments...">
+         </textarea>
+      </mat-form-field>
+      <div class="btns">
+         <button type="submit" mat-flat-button color="primary">{{action == 'edit'?'Save':action}}</button>
+         <button 
+            type="button" 
+            mat-flat-button color="warn" 
+            (click)="onCancel()" 
+            *ngIf="action == 'edit'">
+            Cancel
+         </button>      
+      </div>
+      
+   </form>
+   
+</div>

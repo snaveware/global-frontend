@@ -1,0 +1,32 @@
+
+<div class="home">
+      <app-dialog
+         *ngIf="showWarning"
+         [action] = 'dialogAction'
+         [message]="warnMessage"
+         (selected) = "closeDialog($event)">
+      </app-dialog>
+      <app-dialog
+         [message] ="promptMessage"
+         *ngIf="showDeletePrompt"
+         action = 'confirm'
+         (selected) = "onDeletePrompt($event)">
+      </app-dialog>
+      <div class="loader" *ngIf="isLoadingResults" >
+            <mat-spinner ></mat-spinner> 
+      </div>
+   
+      <app-user-table
+         *ngIf="!isLoadingResults"
+         display="home"
+         (delete) = "onDelete($event)"
+         [users]="users">
+      </app-user-table>
+      
+      <!-- <div class="more-from-db">
+         <button (click)="onLoadMore()" mat-flat-button  color="primary" >
+            Load More Users
+         </button>
+      </div> -->
+      
+   </div>

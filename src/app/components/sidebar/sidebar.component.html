@@ -1,0 +1,242 @@
+<mat-sidenav-container class="sidebar" >
+   <mat-sidenav  
+      *ngIf="loggedIn"
+      class="sidenav" 
+      #sidenav
+      [mode]="matchedMobile?'over':'side'" 
+      opened [fixedInViewport] ="matchedMobile" 
+      [fixedTopGap]= "60">
+      <div class="sidebar-user">
+         <img class="bg-img" src="../../assets/white-pattern.jpg" alt="">
+         <div class="content">
+            <img class="avatar"[src]="userProfileUrl" alt="">
+            <button mat-button (click)="onShowSidebarUserActions()">
+            <span class="name">{{userNames}}</span>
+            <i 
+            class="caret-icon fas fa-caret-down"
+            >
+            </i>
+            </button>
+         
+         </div>   
+      </div>
+
+     <div class="actions" *ngIf="showSidebarUserActions"(click)="showSidebarUserActions = false">
+       <a (click) = "onMyAccount()" routerLinkActive="router-link-active"  class="action"><i class="fas fa-user"></i> Profile</a>
+       <a (click) ="onLogout()"  class="action"><i class=" logout fas fa-power-off" ></i> Logout</a>
+     </div>
+
+     <div class="search">
+       <mat-form-field appearance="legacy" color="primary">
+         <mat-label><i class="fas fa-search"></i> Search {{collection}}</mat-label>
+         <input matInput ngModel #search="ngModel" (change) ="onSearch(search.control.value)">
+       </mat-form-field>
+     </div>
+     
+     <div class="tabs">
+        <div class="dashboard">
+         <div [class.active] = "activePath == ''"class="tab-title">
+            <div 
+               class="start"
+               (click)="onActivateTab('')">
+               <i class="fas fa-home"></i>
+               <span>dashboard</span>
+            </div>
+           <div class="end">
+            <!-- <i *ngIf="activePath.indexOf('manifest') == -1" class="fas fa-plus"></i>
+            <i *ngIf="activePath.indexOf('manifest')!= -1" class="fas fa-minus"></i> -->
+           </div>     
+         </div>
+        </div>
+        <div class="manifests">
+            <div 
+               [class.active]="activePath.indexOf('manifest')!= -1"
+               class="tab-title"
+               (click)="onActivateTab('manifests')">
+               <div class="start">
+                  <i class="fas fa-tasks"></i>
+                  <span>Manifests</span>
+               </div>
+              <div class="end">
+               <i *ngIf="activePath.indexOf('manifest') == -1" class="fas fa-plus"></i>
+               <i *ngIf="activePath.indexOf('manifest')!= -1" class="fas fa-minus"></i>
+              </div>     
+           </div>
+           <div class="links" *ngIf="activePath.indexOf('manifest')!= -1">
+               <a 
+                  [routerLink]="['/manifests/']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'manifests'">
+                  active
+               </a>
+               <a 
+                  [routerLink]="['/manifests/new']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'manifests/new'" >
+                  new 
+                  
+                  <i class="fas fa-folder-plus new-icon" ></i>
+                  
+               </a>
+               <a 
+                  [routerLink]="['/manifests/arrived']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath =='manifests/arrived'">
+                  arrived
+               </a>
+               <a
+                  [routerLink]="['/manifests/shipping']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'manifests/shipping'">
+                  shipping
+               </a>
+               <a 
+                  [routerLink]="['/manifests/incomplete']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'manifests/incomplete'">
+                  incomplete
+               </a>
+               <a 
+                  [routerLink]="['/manifests/archived']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'manifests/archived'">
+                  archived
+               </a>
+           </div>
+           
+        </div>
+         <div class="shipments">
+            <div 
+               [class.active]="activePath.indexOf('shipment')!= -1"
+               class="tab-title"
+               (click)="onActivateTab('shipments')">
+               <div class="start">
+                  <i class="fas fa-paper-plane"></i>
+                  <span>shipments</span>
+               </div>
+              <div class="end">
+               <i *ngIf="activePath.indexOf('shipment') == -1" class="fas fa-plus"></i>
+               <i *ngIf="activePath.indexOf('shipment')!= -1" class="fas fa-minus"></i>
+              </div>     
+            </div>
+            <div class="links" *ngIf="activePath.indexOf('shipment')!= -1">
+               <a 
+                  [routerLink]="['/shipments']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link]="activePath == 'shipments'">
+                  active
+               </a>
+               <a 
+                  [routerLink]="['/shipments/new']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link]="activePath == 'shipments/new'">
+                  new
+                  <i class="fas fa-plus-circle new-icon" ></i>
+               </a>
+               <a 
+                  [routerLink]="['/shipments/arrived']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link]="activePath == 'shipments/arrived'">
+                  arrived
+               </a>
+               <a 
+                  [routerLink]="['/shipments/shipping']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link]="activePath == 'shipments/shipping'">
+                  shipping
+               </a>
+               <a 
+                  [routerLink]="['/shipments/incomplete']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link]="activePath == 'shipments/incomplete'">
+                  incomplete
+               </a>
+               <a 
+                  [routerLink]="['/shipments/archived']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link]="activePath == 'shipments/archived'">
+                  archived
+               </a>
+            </div>
+         </div>
+        <div class="users">
+         <div 
+            [class.active]="activePath.indexOf('user')!= -1 && activePath.indexOf('group') == -1"
+            class="tab-title"
+            (click)="onActivateTab('users')">
+            <div class="start">
+               <i class="fas fa-users"></i>
+               <span>users</span>
+            </div>
+           <div class="end">
+            <i *ngIf="activePath.indexOf('users') == -1" class="fas fa-plus"></i>
+            <i *ngIf="activePath.indexOf('users')!= -1" class="fas fa-minus"></i>
+           </div>     
+              
+            </div>
+            <div class="links" *ngIf="activePath.indexOf('users')!= -1">
+               <a 
+                  [routerLink]="['/users']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'users'">
+                  all
+               </a>
+               <a 
+                  [routerLink]="['/users/new']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'users/new'">
+                  new
+                  <i class="fas fa-user-plus new-icon" ></i>
+               </a>
+               <a 
+                  [routerLink]="['/users/active']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'users/active'">
+                  active
+               </a>
+               <a 
+                  [routerLink]="['/users/locked']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'users/locked'">
+                  locked
+               </a>
+            </div>
+            
+        </div>
+        <div class="user-groups">
+            <div 
+               [class.active]="activePath.indexOf('group')!= -1"
+               class="tab-title"
+               (click)="onActivateTab('groups')">
+               <div class="start">
+                  <i class="fas fa-user-friends"></i>
+                  <span>User groups</span>
+               </div>
+              <div class="end">
+               <i *ngIf="activePath.indexOf('group') == -1" class="fas fa-plus"></i>
+               <i *ngIf="activePath.indexOf('group')!= -1" class="fas fa-minus"></i>
+              </div>        
+            </div>
+            <div class="links" *ngIf="activePath.indexOf('group')!= -1" >
+               <a 
+                  [routerLink]="['/groups']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'groups'">
+                  all
+               </a>
+               <a 
+                  [routerLink]="['/groups/new']" 
+                  routerLinkActive="router-link-active" 
+                  [class.active-link] = "activePath == 'groups/new'">
+                  New
+                  <i class="fas fa-wrench new-icon" ></i>
+               </a> 
+            </div>            
+        </div>
+     </div>
+   </mat-sidenav>
+   <mat-sidenav-content>
+      <ng-content></ng-content>
+   </mat-sidenav-content>
+   
+</mat-sidenav-container>
