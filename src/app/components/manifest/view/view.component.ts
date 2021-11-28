@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { isObservable } from 'rxjs';
-import { Manifest } from 'src/app/models/manifest';
-import { Shipment } from 'src/app/models/shipment';
+import { Manifest } from 'src/app/models/Manifest';
+import { Shipment } from 'src/app/models/Shipment';
 import { ManifestService } from 'src/app/services/manifest/manifest.service'
 import { ActivatedRoute } from '@angular/router';
 import { ShipmentService } from 'src/app/services/shipment/shipment.service';

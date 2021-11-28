@@ -15,7 +15,7 @@ export class UtilsService {
   
   static httpOptions = { 
     headers:UtilsService.checkInitialLoginStatus()? new HttpHeaders({
-      'token': UtilsService.getToken()
+      'authorization': `Bearer ${UtilsService.getToken()}`
     }):{}
   }
 
