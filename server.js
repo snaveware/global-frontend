@@ -9,6 +9,6 @@ app.get('/*', (req,res) =>{
     res.sendFile('./src/index.js', {root: "./dist/global/"})
 })
 
-app.listen(process.env.PORT || 4200, ()=>{
-    console.log('server started on port', process.env.PORT ||4200)
+app.listen(process.env.PORT , ()=>{
+    console.log('server started on port', process.env.PORT)
 })
