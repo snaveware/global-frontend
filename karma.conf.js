@@ -19,6 +19,7 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/global'),
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
+      
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
