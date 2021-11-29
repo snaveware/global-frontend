@@ -40,8 +40,12 @@ export class AuthService {
       sessionStorage.removeItem('lastName')
       sessionStorage.removeItem('level')
       sessionStorage.removeItem('permissions') 
-      this.router.navigate(['/login'])
-      console.log('not logged in')
+
+      if(location.pathname != '/forgot' && location.pathname != '/change'){
+        this.router.navigate(['/login'])
+        console.log('not logged in')
+      }
+     
     }
     this._isLoggedIn.next(data.state)
     console.log('login state ',data.state)
@@ -49,6 +53,28 @@ export class AuthService {
 
   login(credentials:{email:string,password:string}){
     return this.http.post(`${environment.BACKEND_BASE_URL}/auth/login`,credentials)
+    .pipe(
+      catchError(UtilsService.errorHandler)
+    )
+  }
+  requestRecoveryEmail(email: string){
+    const body = {
+      email: email,
+      setNewPasswordUrl: `${location.origin}/change`
+    }
+    return this.http.post(`${environment.BACKEND_BASE_URL}/auth/sendrecoveryemail`,body)
+    .pipe(
+      catchError(UtilsService.errorHandler)
+    )
+  }
+
+  changePassword({password, passwordConfirmation, token}){
+    const body = {
+      password: password,
+      confirmPassword: passwordConfirmation,
+      token: token
+    }
+    return this.http.post(`${environment.BACKEND_BASE_URL}/auth/recoverpassword`,body)
     .pipe(
       catchError(UtilsService.errorHandler)
     )

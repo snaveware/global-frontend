@@ -57,6 +57,8 @@ import { GroupTableComponent } from './components/group/table/table.component';
 import { UserHeaderComponent } from './components/user/header/header.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { EmailComponent } from './components/email/email.component';
+import { SendRecoveryComponent } from './components/send-recovery/send-recovery.component';
+import { RecoverComponent } from './components/recover/recover.component';
 
 
 @NgModule({
@@ -93,6 +95,8 @@ import { EmailComponent } from './components/email/email.component';
     UserHeaderComponent,
     DialogComponent,
     EmailComponent,
+    SendRecoveryComponent,
+    RecoverComponent,
   ],
   imports: [
     BrowserModule,

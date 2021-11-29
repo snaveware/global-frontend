@@ -20,6 +20,9 @@ import { GroupViewComponent } from './components/group/view/view.component';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+import { SendRecoveryComponent } from './components/send-recovery/send-recovery.component';
+import { RecoverComponent } from './components/recover/recover.component';
+
 
 const routes: Routes = [
   {
@@ -29,6 +32,14 @@ const routes: Routes = [
   {
     path:'login',
     component:LoginComponent
+  },
+  {
+    path:'forgot',
+    component: SendRecoveryComponent
+  },
+  {
+    path:'change',
+    component: RecoverComponent
   },
   {
     path:'manifests',

@@ -1,0 +1,69 @@
+<div class="login">
+ 
+    <div class="top"></div>
+    <div class="form">
+       <!-- <i class="fas fa-user"></i> -->
+       <h2>New Password</h2>
+       <app-dialog
+          *ngIf="showError"
+          action = 'error'
+          [message] = "errorMessage"
+          (selected) ="selected($event)">
+ 
+       </app-dialog>
+
+       <app-dialog
+            *ngIf="showWarning"
+            [action] = "dialogAction"
+            [message]="warningMessage"
+            (selected) = "closeDialog($event)">
+        </app-dialog>
+    
+       <mat-form-field class="input">
+          <mat-label>Password</mat-label>
+          <input 
+             required
+             minlength="8"
+             type="password" 
+             name="password"
+             ngModel
+             #password="ngModel"
+             matInput >
+             <mat-error *ngIf="password.invalid && password.errors.required">
+                password is required
+             </mat-error>
+             <mat-error *ngIf="password.invalid && password.errors.minlength">
+                Password should be atleast {{password.errors.minlength.requiredLength ||8 }} characters long
+             </mat-error>
+       </mat-form-field>
+
+       <mat-form-field class="input">
+            <mat-label>Password Confirmation</mat-label>
+            <input 
+                required
+                minlength="8"
+                type="password" 
+                name="passwordConfirmation"
+                ngModel
+                #passwordConfirmation="ngModel"
+                matInput >
+            <mat-error *ngIf="passwordConfirmation.invalid && passwordConfirmation.errors.required">
+                You must confirm your password 
+            </mat-error>
+            <mat-error *ngIf="passwordConfirmation.invalid && passwordConfirmation.errors.minlength">
+                Password should be atleast {{password.errors.minlength.requiredLength ||8 }} characters long
+            </mat-error>
+        </mat-form-field>
+ 
+       <button 
+          class="submit-btn" 
+          mat-flat-button 
+          color="primary" 
+          (click)="onSubmit(passwordConfirmation.control.value,password.control.value)">
+          Change
+       </button>
+    </div>
+    
+    
+ </div>
+ 

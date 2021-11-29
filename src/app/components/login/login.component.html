@@ -48,6 +48,11 @@
                Password should be atleast {{password.errors.minlength.requiredLength ||8 }} characters long
             </mat-error>
       </mat-form-field>
+
+      <div>
+         <a class="forgot-password" [routerLink]="['/forgot']" >Forgot Password?</a>
+      </div>
+
       <button 
          class="submit-btn" 
          mat-flat-button 
