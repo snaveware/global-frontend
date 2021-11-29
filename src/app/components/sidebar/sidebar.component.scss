@@ -28,7 +28,7 @@
       height: 100%;
       background-color: var(--primary);
       //z-index:10;
-      opacity: 30%;
+      opacity: 0.3;
       position: absolute;
    }
    .bg-img{
@@ -131,7 +131,6 @@
    }
    .tabs a{
       width:80%!important;
-      opacity: 90%!important;
       font-size: 0.9rem!important;
       position: relative!important;
       opacity: 0.9;

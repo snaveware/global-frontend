@@ -96,7 +96,7 @@ body {
     font-size: 1.5rem;
     text-align: center;
     text-transform: capitalize;
-    opacity: 95%;
+    opacity: 0.95;
   }
   .input{
     display: block;
@@ -149,12 +149,12 @@ body {
     }
     .first{
       font-size:1.3rem;
-      opacity: 95%;
+      opacity: 0.95;
       text-transform: capitalize;
     }
     .second{
       font-size:0.9rem;
-      opacity: 80%;
+      opacity: 0.80;
       
     }
   }
@@ -227,7 +227,7 @@ body {
   cursor: pointer; 
 }
 .clickable:hover{
-  opacity: 90%;
+  opacity: 0.9;
 }
 
 .m-dialog{
@@ -267,7 +267,7 @@ body {
   .message{
     font-size: 0.9rem;
     columns: var(--color);
-    opacity: 90%;
+    opacity: 0.90;
   }
 
   .actions{
@@ -317,12 +317,12 @@ body {
         margin: 5px;
       }
       span{
-        opacity: 80%;
+        opacity: 0.80;
       }
     
     }
     .value{
-      opacity: 90%;
+      opacity: 0.90;
     }
   }
 }
