@@ -10,7 +10,7 @@ describe('ManifestService', () => {
     service = TestBed.inject(ManifestService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+  // it('should be created', () => {
+  //   expect(service).toBeTruthy();
+  // });
 });

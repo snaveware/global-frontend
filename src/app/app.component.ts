@@ -17,6 +17,7 @@ export class AppComponent {
   loggedIn = false
   showSidebar = true
   isDark:boolean = false
+  title:string =  'global'
   tab
   pageDescription
   page
