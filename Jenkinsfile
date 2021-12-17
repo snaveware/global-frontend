@@ -17,11 +17,11 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('dockerize') {
             steps {
                 echo 'building global-frontend'
                 script {
-                    
+
                     checkout scm
 
                     docker.withRegistry('https://registry.hub.docker.com', '5efdc081-eaa6-41c3-85b6-52f9497e6fe4') {
