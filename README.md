@@ -37,8 +37,10 @@ The Frontend is hosted  [Here](https://global-shipping.herokuapp.com/);
 
  docker pull snave020/global-frontend:latest
     
- docker run -d snave020/global-frontend
+ docker run -d -p 80:80 snave020/global-frontend
 
-* You can change  the 4200 port to the port you want the container to run in your machine *
+*you can change the first port 80 to anything you wish*
 
-* You can also remove the -d flag to make the container run in the terminal *
+*access the server through the provided port*
+
+*You can also remove the -d flag to make the container run in the terminal*
