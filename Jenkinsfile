@@ -7,6 +7,7 @@ pipeline {
         stage('build') {
             steps {
                 echo 'building global-frontend'
+                sh 'npm cache clean --force'
                 sh 'npm install'
                 sh 'ng build --prod'
             }
