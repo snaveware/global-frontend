@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -15,7 +15,6 @@
     "@amcharts/amcharts4": "^4.10.12",
     "@angular/animations": "~10.2.0",
     "@angular/cdk": "^10.2.7",
-    "@angular/cli": "~10.2.0",
     "@angular/common": "~10.2.0",
     "@angular/compiler": "~10.2.0",
     "@angular/compiler-cli": "~10.2.0",
@@ -32,7 +31,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.1.2",
-    "@angular/cli": "~10.2.0",
+    "@angular/cli": "^10.2.0",
     "@angular/compiler-cli": "~10.2.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",

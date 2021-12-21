@@ -1,4 +1,4 @@
-# Global
+# Global Shipping Management System
 
 ### Description
 The application is Web Frontend  for a shipping management system Created in angular
@@ -20,7 +20,6 @@ The Frontend is hosted  [Here](https://global-shipping.herokuapp.com/);
 ### Running the project locally
 
 
-
 #### In addition to node and npm, Make sure that angular cli is installed in your system
 
 ####  Install other dependancies by running 
@@ -29,6 +28,10 @@ The Frontend is hosted  [Here](https://global-shipping.herokuapp.com/);
 ####  Start the dev surver by running:
 
 **ng serve**
+
+## Docker
+**Docker Hub:** [https://hub.docker.com/u/snave020](https://hub.docker.com/u/snave020)
+**Frontend Image:** [https://hub.docker.com/r/snave020/global-frontend](https://hub.docker.com/r/snave020/global-frontend)
 
 
 ### Running the project using Docker image 
@@ -44,3 +47,11 @@ The Frontend is hosted  [Here](https://global-shipping.herokuapp.com/);
 *access the server through the provided port*
 
 *You can also remove the -d flag to make the container run in the terminal*
+
+### Contributors
+- Evans Munene SCII/00819/2019
+- Ken Ireri    SCII/00821/2019
+- Calvin Morara SCII/002720/2019
+- Edwin Arusei  SCII/00829/2019
+- Mercy Ndolo   SCII/00810/2019
+
