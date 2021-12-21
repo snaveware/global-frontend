@@ -7,8 +7,6 @@ pipeline {
         stage('build') {
             steps {
                 echo 'building global-frontend'
-                sh 'npm cache clean --force'
-                sh 'sudo chown -R 113:120 "/.npm"'
                 sh 'npm install'
                 sh 'ng build --prod'
 
