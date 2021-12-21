@@ -1,15 +1,17 @@
 pipeline {
-     agent {
-        docker { image 'node:17-alpine3.12' }
+    agent {
+        docker {
+            image 'node:latest'
+            args '-u root:root'
+        }
     }
 
     stages {
         stage('build') {
             steps {
                 echo 'building global-frontend'
-                sh 'npm install'
+                sh 'npm install --no-audit'
                 sh 'ng build --prod'
-
             }
         }
 
