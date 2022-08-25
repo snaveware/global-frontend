@@ -59,7 +59,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { EmailComponent } from './components/email/email.component';
 import { SendRecoveryComponent } from './components/send-recovery/send-recovery.component';
 import { RecoverComponent } from './components/recover/recover.component';
-import { PathLocationStrategy, LocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 
@@ -128,7 +128,7 @@ import { PathLocationStrategy, LocationStrategy } from '@angular/common';
   ],
   providers: [
     ChangeDetectorService,
-    { provide: LocationStrategy, useClass: PathLocationStrategy } 
+    { provide:LocationStrategy, useClass: HashLocationStrategy } 
   ],
   bootstrap: [AppComponent]
 })
