@@ -59,6 +59,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { EmailComponent } from './components/email/email.component';
 import { SendRecoveryComponent } from './components/send-recovery/send-recovery.component';
 import { RecoverComponent } from './components/recover/recover.component';
+import { PathLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 
 @NgModule({
@@ -125,7 +127,8 @@ import { RecoverComponent } from './components/recover/recover.component';
     MatAutocompleteModule
   ],
   providers: [
-    ChangeDetectorService
+    ChangeDetectorService,
+    { provide: LocationStrategy, useClass: PathLocationStrategy } 
   ],
   bootstrap: [AppComponent]
 })

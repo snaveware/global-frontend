@@ -11,6 +11,7 @@ import { UtilsService } from 'src/app/services/utils/utils.service';
 export class LoginComponent implements OnInit {
   errorMessage:string = 'Login error'
   showError:boolean = false
+  isLoading:boolean = false
   constructor(
     private authService: AuthService,
     private router:Router
@@ -25,9 +26,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(email,password){
+
+    this.isLoading = true
     
     this.authService.login({email,password})
     .subscribe(result =>{
+      this.isLoading = false
       this.afterSubscribing(result)
     })
     

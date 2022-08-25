@@ -1,16 +1,16 @@
 <div class="login">
- 
+   <app-dialog
+   *ngIf="showError"
+   action = 'error'
+   [message] = "errorMessage"
+   (selected) ="selected($event)">
+
+   </app-dialog>
    <div class="top"></div>
-   <div class="form">
+   <div class="form" style="position: relative ;">
       <i class="fas fa-user"></i>
       <h2>Login</h2>
-      <app-dialog
-         *ngIf="showError"
-         action = 'error'
-         [message] = "errorMessage"
-         (selected) ="selected($event)">
 
-      </app-dialog>
       <mat-form-field class="input">
          <mat-label>Email</mat-label>
          <input
@@ -29,7 +29,12 @@
          <mat-error *ngIf="email.invalid && email.errors.email">
             Your email is invalid
          </mat-error>
+         
+      <div class="loader"  *ngIf="isLoading" >
+         <mat-spinner ></mat-spinner> 
+      </div>
       </mat-form-field>
+
    
       <mat-form-field class="input">
          <mat-label>Password</mat-label>
