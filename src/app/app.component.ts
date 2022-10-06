@@ -13,6 +13,7 @@ import { UtilsService } from './services/utils/utils.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  userNames = UtilsService.getNames()
   load:boolean = false
   loggedIn = false
   showSidebar = true
@@ -110,7 +111,7 @@ export class AppComponent {
     url = `/${UtilsService.extractPath(url)}`
     switch (url) {
       case '/' :
-        this.fillBannerData('dashboard',null,'welcome John doe')
+        this.fillBannerData('dashboard',null,`Welcome ${this.userNames}`)
         break;
 
       case '/manifests' :
@@ -198,7 +199,7 @@ export class AppComponent {
         this.fillBannerData('groups','edit','edit group')
         break;
       default:
-        this.fillBannerData('dashboard',null,'welcome John doe')
+        this.fillBannerData('dashboard',null,`Welcome ${this.userNames}`)
         break;
     }
   }

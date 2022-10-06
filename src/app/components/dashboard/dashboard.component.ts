@@ -6,6 +6,7 @@ import { ManifestService } from 'src/app/services/manifest/manifest.service';
 import { ShipmentService } from 'src/app/services/shipment/shipment.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { GroupService } from 'src/app/services/group/group.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,6 +44,7 @@ export class DashboardComponent implements OnInit {
   isLoadingResults:boolean = true
   currentFeed = 'Admin'
   userId = '1'
+  userNames = UtilsService.getNames()
   scrolledToBottom:boolean =false
   @ViewChild('feedsContainer') feedsContainer 
   feeds = [
