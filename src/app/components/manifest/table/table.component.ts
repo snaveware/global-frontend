@@ -16,6 +16,7 @@ export class ManifestTableComponent implements OnInit {
   dataSource: MatTableDataSource<Manifest>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   //@ViewChild(MatSort) sort: MatSort;
+  @Input() mode = "normal"
   @Input() display = 'home'
   @Input() manifests:Manifest[] = []
   @Output() selected:EventEmitter<Manifest> = new EventEmitter()

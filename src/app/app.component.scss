@@ -29,6 +29,7 @@
       .theme-icon{
          animation-name:rotate;
          animation-duration: 1s;
+         animation-timing-function: linear;
          animation-iteration-count: infinite;
       }
          

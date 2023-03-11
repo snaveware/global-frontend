@@ -6,15 +6,15 @@
       color:var(--primary);
    }
    .content{
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      // display: grid;
+      // grid-template-columns: 1fr 1fr 1fr 1fr;
 
       ul{
          list-style: none;
-         width:max-content;
+         width:100%;
          border:1px solid var(--white);
          padding: 5px;
-         margin:5px auto;
+         margin:5px;
 
          p{
             text-align: center;

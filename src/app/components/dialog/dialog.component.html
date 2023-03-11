@@ -31,7 +31,10 @@
          *ngIf="action == 'manifests' && !isLoadingResults"
          display="select"
          [manifests] = 'manifests'
-         (selected) = "onSelectManifest($event)">
+         (selected) = "onSelectManifest($event)"
+         mode="popup"
+         >
+         
 
       </app-manifest-table>
    </div>

@@ -231,16 +231,16 @@ body {
 }
 
 .m-dialog{
-  position: absolute;
-  top: 70% ;
-  left:50% ;
+  position: fixed;
+  top: 50% ;
+  left:60% ;
   transform: translate(-50%,-50%);
   display: block;
   padding: 20px;
   width: max-content;
   height: max-content;
   background-color: var(--bg);
-  z-index: 10000;
+  z-index: 100000;
   box-shadow: 2px 2px 6px var(--primary),-2px -2px 6px var(--primary);
   border-radius: 3px;
   .title{
@@ -279,15 +279,18 @@ body {
 
     button{
       margin:5px;
+      width: max-content;
     }
   }
 }
 .maximize{
-  position: absolute!important;
+  position: fixed;
   top:50%;
-  left: 50%;
+  left: 60%;
   transform: translate(-50%,-50%);
-  min-width:90%;
+  margin: auto;
+  width: 60%;
+  // min-width:80%;
 }
 
 .view{
